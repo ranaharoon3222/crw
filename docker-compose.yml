@@ -11,6 +11,7 @@ services:
     environment:
       - RUST_LOG=info
       - CRW_CONFIG=config.docker
+      - CRW_AUTH__API_KEYS__0=${CRW_API_KEY}
   # Primary JS renderer — lightweight (~64 MB), fast startup.
   # Handles most static-JS sites. Falls back to Chrome for complex SPAs.
   lightpanda:
