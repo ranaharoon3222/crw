@@ -12,6 +12,7 @@ services:
       - RUST_LOG=info
       - CRW_AUTH__API_KEYS=${CRW_API_KEY}
       - CRW_CONFIG=config.docker
+      - CRW_RENDERER__PLAYWRIGHT__WS_URL=ws://playwright:9223
     volumes:
       - ./config.docker.toml:/app/config.docker.toml:ro
   # Primary JS renderer — lightweight (~64 MB), fast startup.
@@ -23,7 +24,8 @@ services:
   # Cloudflare challenges that LightPanda cannot.
   # --remote-allow-origins=* lets Chrome accept CDP connections where the
   # Host header is the Docker service name ("chrome") instead of localhost.
-  chrome:
-    image: chromedp/headless-shell:latest
-    shm_size: "2g"
-    command: ["--remote-debugging-port=9223", "--remote-allow-origins=*"]
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.49.0-noble
+    command: ["npx", "playwright", "run-server", "--port=9223"]
+    ports:
+      - "9223:9223"
