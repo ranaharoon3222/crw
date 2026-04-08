@@ -2,59 +2,39 @@
 host = "0.0.0.0"
 port = 3000
 request_timeout_secs = 120
-rate_limit_rps = 10              # Max requests/second (global). 0 = unlimited.
+rate_limit_rps = 3              # Max requests/second (global). 0 = unlimited.
 
 [renderer]
-mode = "auto"                     # auto | none
+mode = "auto"               # auto | lightpanda | playwright | chrome | none
 page_timeout_ms = 30000
 pool_size = 4
 
-# Failover order: LightPanda → Chrome. Configure one or both.
-# In auto mode, CRW tries each renderer in order. If LightPanda crashes
-# on complex SPAs, Chrome takes over. Chrome also handles Cloudflare
-# challenges via built-in stealth injection + challenge retry.
-
 [renderer.lightpanda]
-ws_url = "ws://127.0.0.1:9222/"
-
-# [renderer.chrome]
-# ws_url = "ws://127.0.0.1:9223/"
+ws_url = "ws://lightpanda:9222/"
 
 # [renderer.playwright]
 # ws_url = "ws://playwright:9222"
 
+[renderer.chrome]
+ ws_url = "ws://chrome:9222"
+
 [crawler]
-max_concurrency = 10
-requests_per_second = 10.0
+max_concurrency = 1
+requests_per_second = 1.0
 respect_robots_txt = true
 user_agent = "CRW/0.0.1"
-default_max_depth = 2
+default_max_depth = 3
 default_max_pages = 100
 job_ttl_secs = 3600
-# Proxy support — route crawler requests through an HTTP or SOCKS5 proxy.
-# Useful for bypassing IP-based rate limiting on sites like Reddit, LinkedIn, etc.
-#
-# Examples:
-#   proxy = "http://user:pass@proxy:8080"                      # HTTP proxy
-#   proxy = "socks5://user:pass@proxy:1080"                    # SOCKS5 proxy
-#   proxy = "http://user:pass@geo.iproyal.com:12321"           # Residential (IPRoyal)
-#   proxy = "http://user:pass@pr.oxylabs.io:7777"              # Residential (Oxylabs)
-#   proxy = "http://user:pass@gate.smartproxy.com:7000"        # Residential (Smartproxy)
-#
-# Residential proxies use real ISP IPs and are much harder for sites to detect.
-# Most providers give you a single gateway URL that auto-rotates IPs per request.
-# proxy = "http://proxy:8080"
+# proxy = "http://proxy:8080"   # global proxy for all requests
+stealth = true               # inject browser-like headers + rotate UA globally
 
 [extraction]
 default_format = "markdown"
 only_main_content = true
 
-[auth]
-# api_keys = ["fc-key-1234"]
 
-# [extraction.llm]
-# provider = "anthropic"        # "anthropic" or "openai"
-# api_key = "sk-..."            # or use CRW_EXTRACTION__LLM__API_KEY env var
-# model = "claude-sonnet-4-20250514"
-# max_tokens = 4096
-# base_url = "https://custom-endpoint.example.com"  # optional, for OpenAI-compatible APIs
+[auth]
+api_keys = ["f3a9c8d2b7e41f6a9c0d5e8b2a7f4c1d9e6b3a8f0c2d7e1b5"]
+
+
