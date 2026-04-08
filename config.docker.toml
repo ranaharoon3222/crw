@@ -39,6 +39,6 @@ only_main_content = true
 
 
 [auth]
-#api_keys = [""]
+api_keys = ["123"]
 
 
