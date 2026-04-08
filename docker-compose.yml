@@ -14,9 +14,7 @@ services:
       - CRW_CONFIG=config.docker
       - CRW_RENDERER__PLAYWRIGHT__WS_URL=ws://playwright:9223
     volumes:
-      - type: bind
-        source: ./config.docker.toml
-        target: /app/config.docker.toml
+      - ./config.docker.toml:/app/config.docker.toml
 
   # Primary JS renderer — lightweight (~64 MB), fast startup.
   # Handles most static-JS sites. Falls back to Chrome for complex SPAs.
