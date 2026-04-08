@@ -24,4 +24,4 @@ services:
   chrome:
     image: chromedp/headless-shell:latest
     shm_size: "2g"
-    command: ["--remote-debugging-port=9222", "--remote-allow-origins=*"]
+    command: ["--remote-debugging-port=9223", "--remote-allow-origins=*"]
