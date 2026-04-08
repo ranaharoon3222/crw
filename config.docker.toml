@@ -16,11 +16,11 @@ pool_size = 4
 [renderer.lightpanda]
 ws_url = "ws://lightpanda:9222/"
 
-# [renderer.playwright]
-# ws_url = "ws://playwright:9222"
+[renderer.playwright]
+ ws_url = "ws://playwright:9223/"
 
-[renderer.chrome]
- ws_url = "ws://chrome:9223"
+#[renderer.chrome]
+ #ws_url = "ws://chrome:9223"
 
 [crawler]
 max_concurrency = 1
