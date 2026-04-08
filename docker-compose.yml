@@ -10,9 +10,7 @@ services:
         condition: service_started
     environment:
       - RUST_LOG=info
-      - CRW_CONFIG=config.docker
-    volumes:
-      - ./config.docker.toml:/app/config.docker.toml:ro
+      - CRW_CONFIG=/app/config.docker.toml
 
   # Primary JS renderer — lightweight (~64 MB), fast startup.
   # Handles most static-JS sites. Falls back to Chrome for complex SPAs.
