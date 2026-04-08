@@ -16,7 +16,7 @@ ws_url = "ws://lightpanda:9222/"
 # ws_url = "ws://playwright:9222"
 
 [renderer.chrome]
- ws_url = "ws://chrome:9222"
+ ws_url = "ws://chrome:9223"
 
 [crawler]
 max_concurrency = 1
