@@ -6,21 +6,13 @@ services:
     depends_on:
       lightpanda:
         condition: service_started
-      playwright:
-        condition: service_started
     environment:
       - RUST_LOG=info
-      - CRW_AUTH__API_KEYS=${CRW_API_KEY}
       - CRW_CONFIG=config.docker
-      - CRW_RENDERER__PLAYWRIGHT__WS_URL=ws://playwright:9223
     volumes:
       - ./config.docker.toml:/app/config.docker.toml
   # Primary JS renderer — lightweight (~64 MB), fast startup.
   # Handles most static-JS sites. Falls back to Chrome for complex SPAs.
   lightpanda:
     image: lightpanda/browser:latest
-  playwright:
-    image: mcr.microsoft.com/playwright:v1.49.0-noble
-    command: ["npx", "playwright", "run-server", "--port=9223"]
-    ports:
-      - "9223:9223"
+
