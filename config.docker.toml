@@ -2,40 +2,40 @@
 # Renderer failover order: HTTP → LightPanda → Chrome.
 
 
-[server]
-host = "0.0.0.0"
-port = 3000
-request_timeout_secs = 120
-rate_limit_rps = 3              # Max requests/second (global). 0 = unlimited.
+#[server]
+#host = "0.0.0.0"
+#port = 3000
+#request_timeout_secs = 120
+#rate_limit_rps = 3              # Max requests/second (global). 0 = unlimited.
 
-[renderer]
-mode = "auto"               # auto | lightpanda | playwright | chrome | none
-page_timeout_ms = 30000
-pool_size = 4
+#[renderer]
+#mode = "auto"               # auto | lightpanda | playwright | chrome | none
+#page_timeout_ms = 30000
+#pool_size = 4
 
-[renderer.lightpanda]
-ws_url = "ws://lightpanda:9222/"
+#[renderer.lightpanda]
+#ws_url = "ws://lightpanda:9222/"
 
-[renderer.playwright]
- ws_url = "ws://playwright:9223/"
+#[renderer.playwright]
+#ws_url = "ws://playwright:9223/"
 
 #[renderer.chrome]
  #ws_url = "ws://chrome:9223"
 
-[crawler]
-max_concurrency = 1
-requests_per_second = 1.0
-respect_robots_txt = true
-user_agent = "CRW/0.0.1"
-default_max_depth = 3
-default_max_pages = 100
-job_ttl_secs = 3600
+#[crawler]
+#max_concurrency = 1
+#requests_per_second = 1.0
+#respect_robots_txt = true
+#user_agent = "CRW/0.0.1"
+#default_max_depth = 3
+#default_max_pages = 100
+#job_ttl_secs = 3600
 # proxy = "http://proxy:8080"   # global proxy for all requests
 #stealth = "true"               # inject browser-like headers + rotate UA globally
 
-[extraction]
-default_format = "markdown"
-only_main_content = true
+#[extraction]
+#default_format = "markdown"
+#only_main_content = true
 
 
 [auth]
